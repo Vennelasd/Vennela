@@ -1,0 +1,90 @@
+
+trigger courseTrigger on Course__c(before insert,before update,before delete){
+
+
+if(Trigger.isinsert == true // Trigger.isUpdate == true ){
+List<Course__c> courses = Trigger.new;
+for(Course__c crs : courses){
+if(crs.fee__c < 50){
+crs.fee__c.adderror('cheap courses not allowed');
+}
+}
+
+.................................................................
+
+if(Trigger.isDelete == true){
+List<Course__c> courses = Trogger.old;
+for(Course__c crs : courses){
+if(crs.fee__c > 50){
+crs.fee__c.adderror('Costly corse are not deleted');
+}
+}
+}
+................................................................
+
+trigger aftertrigger on Course__c(after insert.after update,after delete,after undelete){
+if(Trigger.isbefore == true){
+system.debug('new version of the record : ' + Trigger.new);
+}
+
+
+if(Trigger.isAfter == true){
+system.debug('new version of the record : ' + Trigger.new);
+}
+}
+.................................................
+trigger crosstrigger on Book__c(before insert,before update){
+List<Student__c> students = [select id,name from Student__c];
+List<Book__c> books = Trigger.new;
+for(Student__c stu : students){
+for(Book__c book : books){
+if(book.author_name = stu.student_name){
+book.adderror('student cannot be a author');
+}
+}
+}
+}
+............................................................
+List<Doctor__c> doct = new List<Doctor__c>();
+ Doctor__c doc = new Doctor__c();
+ 
+ doc.Name = 'mummy';
+ doc.Fee__c = 600;
+  Doctor__c doc1 = new Doctor__c();
+ doc1.Name = 'daddy';
+ doc1.Fee__c = 700;
+ doct.add(doc);
+ doct.add(doc1);
+try{
+insert doct;
+    System.debug('insert sucessful');
+}
+catch(Exception e){
+    System.debug('insert unsucessful');
+}
+..................................................
+List<Doctor__c> doct = [select Id, Name, Fee__c from Doctor_c limit 2 off 2];
+for(Doctor__c doc: doct){
+    doc.Name = 'New' + doc.Name;
+    doc.Fee__c += 20;
+try{
+update doct;
+    System.debug('update sucessful');
+}
+catch(Exception e){
+    System.debug('update unsucessful');
+}
+}
+............................................................................
+List<Patient__c>pat = [Select Id, Name, Fee__c from Patient__c];
+for(Patient__c p: pat){
+    if( p.Fee__c < 300){
+try{
+Delete pat;
+    System.debug('Delete sucessful');
+}
+catch(Exception e){
+    System.debug('Delete unsucessful');
+}
+}
+}

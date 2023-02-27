@@ -1,0 +1,43 @@
+trigger closedOpportunity on Opportunity(after insert, after update){
+List<Task>taskList = new List<Task>();
+for(Opportunity opp:Trigger.new){
+if(opp.StageName == 'Closed Won'){
+taskList.add(new task(Subject = 'Follow Up Test Task',WhatId = opp.Id));
+}
+}
+if(taskList.size()>0){
+insert taskList;
+}
+}
+..........................................
+trigger AccountUpdate on Opportunity(after insert, after update){
+set<Id>accIds = new set<Id>();
+List<Account>accounts = new List<Account>();
+for(Opportunity o:trigger.new){
+accIds.add(o.accountId);
+}
+for(account a:[Select id, Rating fromAccount where id In :accIds]){
+for(Opportunity opp:trigger.new){
+if(opp.StageName == 'Closed Won'){
+a.Rating = 'Hot';
+accounts.add(a);
+}
+}
+}
+update accounts;
+}
+..............................................
+@isTest
+public class testclasstrigger{
+public static void testmethod trigger test{
+Account acct = new Account();
+acct.name = 'Test';
+Opportunity oppt = new Opportunity();
+oppt.name = 'Test opp';
+oppt.StageName = 'Closed Won';
+ test.startTest();
+insert acct;
+insert oppt;
+test.stopTest();
+}
+}

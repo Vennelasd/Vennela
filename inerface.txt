@@ -1,0 +1,33 @@
+Can we have a Top Level CLass?
+     Yes
+Can we have a inner Class?
+     yes
+Can Inner class have another Inner Class?
+              No
+Can we have Top Level Interface?
+          Yes
+Can we have InerInterface in a TopLevelCLass? 
+               Yes
+Can we have InerInterface in a TopLevelInterface? 
+                    No
+Can we create object for TopLevel Class?
+               Yes
+MyTopLevelClass Mtl_obj = new MyTopLevelClass();
+
+How to create InnerClass object?
+MyTopLevelClass.Myinnerclass Mic_obj = new MyTopLevelClass.Myinnerclass();
+
+How to access InnerClass Method?
+ Mic_obj.Myinnerclassmtd();
+
+Can TopLevel have static members?
+         Yes
+Can innerLevel have static members?
+        No
+Can we create Object for an Interface?
+       No
+How to Implment a TopLevelInterface?
+        Classname implements MyTopLevelInterface
+
+How to implement InnerInterface?
+   MyTopLevelClass.Myinnerinterface

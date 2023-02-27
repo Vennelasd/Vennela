@@ -1,0 +1,41 @@
+@isTest
+public class practice {
+    @isTest public static void anyName(){
+List<String>Gods_names = new List<String>();
+Gods_names.add('om');
+Gods_names.add('shiva');
+System.debug('Gods Names are :' + Gods_names);
+Gods_names.remove(1);
+System.debug('removed Names are :' + Gods_names);
+        try{
+           Gods_names.set(0,'shiva'); 
+            System.debug('set is sucessful');
+        }  
+        catch(Exception e){
+            System.debug('set is unsucessful');          
+            }
+
+Gods_names.size();
+System.debug('size Names are :' + Gods_names);
+set<String>child_names = new set<String>();
+child_names.add('ninee');
+child_names.add('poo');
+System.debug('child Names are :' + child_names);
+child_names.remove('ninee');
+System.debug('removed Names are :' + child_names);
+child_names.size();
+System.debug('size Names are :' + child_names);
+child_names.isempty();
+System.debug('isempty Names are :' + child_names);
+Map<Integer,String>country_code = new Map<Integer,String>();
+country_code.put(41,'India');
+country_code.put(61,'aust');
+System.debug('country codes are :' + country_code);
+country_code.remove(41);
+System.debug('removed are :' + country_code);
+country_code.get(61);
+System.debug('get are :' + country_code);
+country_code.containskey(41);
+System.debug('containkey are :' + country_code);
+    }
+}
